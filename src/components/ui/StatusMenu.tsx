@@ -1,27 +1,24 @@
 import { Menu, Transition } from "@headlessui/react";
+import { collection, doc, updateDoc } from "firebase/firestore";
 import { Fragment } from "react";
-import { useStore } from "../../context/context";
+import { db } from "../../firebase/firebase";
 
 interface StautsMenuProps {
   order: {
-    customerName: string;
+    id: string;
     status: string;
   };
 }
 
 const StatusMenu: React.FC<StautsMenuProps> = ({ order }) => {
-  const { orders, setOrders } = useStore();
-  const delivered = (name: string) => {
-    const delivered = orders.map((order: { customerName: string }) =>
-      order.customerName === name ? { ...order, status: "Delivered" } : order
-    );
-    setOrders(delivered);
+  const delivered = (id: string) => {
+    const orderRef = doc(db, "orders", `${id}`);
+    updateDoc(orderRef, { status: "Delivered" });
   };
-  const cancelled = (name: string) => {
-    const cancel = orders.map((order: { customerName: string }) =>
-      order.customerName === name ? { ...order, status: "Cancelled" } : order
-    );
-    setOrders(cancel);
+
+  const cancelled = (id: any) => {
+    const orderRef = doc(db, "orders", `${id}`);
+    updateDoc(orderRef, { status: "Cancelled" });
   };
 
   return (
@@ -53,7 +50,7 @@ const StatusMenu: React.FC<StautsMenuProps> = ({ order }) => {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  onClick={() => delivered(order.customerName)}
+                  onClick={() => delivered(order.id)}
                   className={`${
                     active
                       ? "bg-[#84cc16] text-white"
@@ -67,7 +64,7 @@ const StatusMenu: React.FC<StautsMenuProps> = ({ order }) => {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  onClick={() => cancelled(order.customerName)}
+                  onClick={() => cancelled(order.id)}
                   className={`${
                     active
                       ? "bg-[#84cc16] text-white"

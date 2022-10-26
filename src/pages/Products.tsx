@@ -5,9 +5,22 @@ import SortProductsBy from "../components/ui/SortProductsBy";
 import GridContent from "../components/Products/GridContent";
 import TableContent from "../components/Products/TableContent";
 import { useStore } from "../context/context";
+import { useEffect } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 const Products: React.FC = () => {
-  const { collectionType } = useStore();
+  const { collectionType, setProducts, setFilteredBy } = useStore();
+  useEffect(() => {
+    const getProducts = async () => {
+      const productsRef = collection(db, "products");
+      onSnapshot(productsRef, (doc) => {
+        setProducts(doc.docs.map((doc) => doc.data()));
+        setFilteredBy(doc.docs.map((doc) => doc.data()));
+      });
+    };
+    getProducts();
+  }, []);
   return (
     <div className="space-y-4">
       <div className="flex flex-col justify-between space-y-2 xl:flex-row xl:items-end">

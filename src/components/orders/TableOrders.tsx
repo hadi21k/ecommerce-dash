@@ -27,16 +27,11 @@ const TableOrders = () => {
             Status
           </h1>
         </div>
-        <motion.div
-          layout
-          transition={{
-            layout: { duration: 0.8, type: "spring", delay: 0.2 },
-          }}
-          className="space-y-4 pb-24"
-        >
+        <div className="space-y-4 pb-24">
           <AnimatePresence>
             {filterOrders.map(
               (order: {
+                id: string;
                 customerName: string;
                 price: number;
                 quantity: number;
@@ -50,7 +45,7 @@ const TableOrders = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  key={order.customerName}
+                  key={order.id}
                   transition={{
                     layout: { duration: 1.2, ease: "linear", type: "spring" },
                     opacity: { duration: 0.2, delay: 0.1 },
@@ -62,7 +57,7 @@ const TableOrders = () => {
               )
             )}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

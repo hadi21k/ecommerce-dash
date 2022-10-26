@@ -1,21 +1,21 @@
 import { AtSymbolIcon, EyeIcon } from "@heroicons/react/24/outline";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../context/login";
 import useInput from "../hooks/useInput";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const [email, onEmailChange, setEmail] = useInput("");
-  const [password, onPasswordChange, setPassword] = useInput("");
+  const [email, onEmailChange] = useInput("");
+  const [password, onPasswordChange] = useInput("");
   return (
-    <div className="mx-auto flex min-h-screen max-w-screen-xl items-center px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen max-w-screen-xl items-center px-4 py-16 sm:px-6 lg:px-8 bg">
       <div className="w-full">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="text-2xl font-bold sm:text-3xl">Login</h1>
         </div>
         <form
           onSubmit={(e) => {
-            login(e, email, password);
+            login(e, email.toString(), password.toString());
             navigate("/");
           }}
           className="mx-auto mt-8 mb-0 max-w-md space-y-4 text-dark dark:text-light"
@@ -29,7 +29,7 @@ const Login: React.FC = () => {
                   placeholder="Email"
                   value={email}
                   onChange={onEmailChange}
-                  className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm text-dark"
                 />
                 <span className="absolute left-0 top-2 -translate-y-1/2 text-xs text-light transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs dark:text-dark">
                   Email

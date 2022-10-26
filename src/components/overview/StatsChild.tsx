@@ -17,7 +17,7 @@ const StatsChild: React.FC<Props> = ({ stat }) => {
           {stat.category}
         </h1>
         <h4 className="text-2xl font-semibold dark:group-hover:text-light ">
-          ${stat.numbers}
+          ${stat.number}
         </h4>
         <div className="flex justify-between">
           <h6 className="flex items-center space-x-2">
@@ -27,7 +27,7 @@ const StatsChild: React.FC<Props> = ({ stat }) => {
               <ArrowTrendingDownIcon className="h-4 w-4 text-red-500 dark:group-hover:text-light" />
             )}
             <span className="text-sm dark:group-hover:text-light">
-              {stat.increasedPercentage}%
+              {stat.percentage}%
             </span>
           </h6>
           <h5 className="text-sm dark:group-hover:text-light">

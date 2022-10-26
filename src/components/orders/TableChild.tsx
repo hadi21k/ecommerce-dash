@@ -3,6 +3,7 @@ import StatusMenu from "../ui/StatusMenu";
 
 interface TableChildProps {
   order: {
+    id: string;
     customerName: string;
     price: number;
     quantity: number;

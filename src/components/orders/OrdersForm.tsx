@@ -1,5 +1,7 @@
+import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useStore } from "../../context/context";
+import { db } from "../../firebase/firebase";
 import Button from "../ui/Button";
 import OrdersInputs from "./OrdersInputs";
 
@@ -8,27 +10,32 @@ interface OrdersFormProps {
 }
 
 const OrdersForm: React.FC<OrdersFormProps> = ({ setIsOpen }) => {
-  const { orders, setOrders, setFilterOrders } = useStore();
+  const { orders } = useStore();
   const [order, setOrder] = useState({
     customerName: "",
     product: "",
     price: "",
+    category: "",
     quantity: "",
     date: "",
     time: "",
     status: "",
   });
+
   const [error, setError] = useState<{ type: string; message: string }>({
     type: "",
     message: "",
   });
-  const submit = () => {
+
+  const submit = async () => {
     if (order.customerName.length === 0) {
       setError({ type: "emptyName", message: "Name is required" });
       return;
     }
-    setOrders([...orders, order]);
-    setFilterOrders([...orders, order]);
+    const time = new Date().getTime();
+    const orderRef = doc(db, "orders", `${time}`);
+    setDoc(orderRef, { ...order, id: time });
+
     setIsOpen(false);
   };
   return (

@@ -42,3 +42,17 @@ input:-webkit-autofill:active {
     margin: 0;
   }
 }
+
+.bg {
+  background: linear-gradient(
+    123deg,
+    #461b93 0%,
+    #461b93 40%,
+    #6a3cbc calc(40% + 1px),
+    #6a3cbc 60%,
+    #8253d7 calc(60% + 1px),
+    #8253d7 70%,
+    #f78f1e calc(70% + 1px),
+    #f78f1e 100%
+  );
+}

@@ -1,9 +1,24 @@
+import { collection, onSnapshot } from "firebase/firestore";
+import { useEffect } from "react";
 import AddOrders from "../components/orders/AddOrders";
 import GridOrders from "../components/orders/GridOrders";
 import SortOrdersBy from "../components/orders/SortOrdersBy";
 import TableOrders from "../components/orders/TableOrders";
+import { useStore } from "../context/context";
+import { db } from "../firebase/firebase";
 
 const Orders = () => {
+  const { setOrders, setFilterOrders } = useStore();
+  useEffect(() => {
+    let getOrders = async () => {
+      let ordersRef = collection(db, "orders");
+      onSnapshot(ordersRef, (doc) => {
+        setOrders(doc.docs.map((doc) => doc.data()));
+        setFilterOrders(doc.docs.map((doc) => doc.data()));
+      });
+    };
+    getOrders();
+  },[]);
   return (
     <div className="space-y-4">
       <div className="flex flex-col justify-between space-y-2 xl:flex-row xl:items-end">

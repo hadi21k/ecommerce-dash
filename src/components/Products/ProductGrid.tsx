@@ -1,19 +1,16 @@
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
-import { useStore } from "../../context/context";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 
 interface ProductGridProps {
   product: any;
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({ product }) => {
-  const { products, setProducts, setFilteredBy } = useStore();
   const deleteProduct = (name: string) => {
-    const filterProduct = products.filter(
-      (product: any) => product.name !== name
-    );
-    setProducts(filterProduct);
-    setFilteredBy(filterProduct);
+    const docRef = doc(db, "products", name);
+    deleteDoc(docRef);
   };
   return (
     <>

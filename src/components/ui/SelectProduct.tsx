@@ -3,6 +3,9 @@ import { Combobox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { motion } from "framer-motion";
 import { useStore } from "../../context/context";
+import { useEffect } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 
 interface SelectProductProps {
   selected: string;
@@ -13,8 +16,18 @@ const SelectProduct: React.FC<SelectProductProps> = ({
   selected,
   setSelected,
 }) => {
-  const { products } = useStore();
+  const { products, setProducts } = useStore();
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const productsRef = collection(db, "products");
+      onSnapshot(productsRef, (doc) => {
+        setProducts(doc.docs.map((doc) => doc.data()));
+      });
+    };
+    getProducts();
+  }, []);
 
   const filteredProducts =
     query === ""

@@ -1,19 +1,16 @@
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { useStore } from "../../context/context";
+import { TrashIcon } from "@heroicons/react/24/solid";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 
 interface ProductTableProps {
   product: any;
 }
 
 const ProductTable: React.FC<ProductTableProps> = ({ product }) => {
-  const { products, setProducts, setFilteredBy } = useStore();
   const { name, price, stock, category, sold, id } = product;
   const deleteProduct = (name: string) => {
-    const filterProduct = products.filter(
-      (product: any) => product.name !== name
-    );
-    setProducts(filterProduct);
-    setFilteredBy(filterProduct);
+    const docRef = doc(db, "products", name);
+    deleteDoc(docRef);
   };
   return (
     <>
@@ -24,7 +21,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ product }) => {
         {price}
       </h1>
       <h1 className="flex items-start justify-center px-4 font-medium tracking-wide">
-        {stock}
+        {stock ? stock : 0}
       </h1>
       <h1 className="flex items-start justify-center px-4 font-medium tracking-wide">
         {category}

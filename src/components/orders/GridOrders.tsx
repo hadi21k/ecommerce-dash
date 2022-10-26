@@ -5,15 +5,10 @@ import StatusMenu from "../ui/StatusMenu";
 const GridOrders = () => {
   const { filterOrders } = useStore();
   return (
-    <motion.div
-      layout
-      transition={{
-        layout: { duration: 0.8, type: "spring", delay: 0.2 },
-      }}
-      className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:hidden xl:grid-cols-4"
-    >
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:hidden xl:grid-cols-4">
       {filterOrders.map(
         (order: {
+          id: string;
           customerName: string;
           price: number;
           quantity: number;
@@ -27,7 +22,7 @@ const GridOrders = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            key={order.customerName}
+            key={order.id}
             transition={{
               layout: { duration: 1.2, ease: "linear", type: "spring" },
               opacity: { duration: 0.2, delay: 0.1 },
@@ -37,7 +32,7 @@ const GridOrders = () => {
             <div className="flex items-center justify-between border-b border-gray py-2 text-xs">
               <span>{order.date}</span>
               <span>
-                {order.time.split(":")[0]}:{order.time.split(":")[1]}
+                {order.time?.split(":")[0]}:{order.time?.split(":")[1]}
               </span>
             </div>
             <div className="mt-2 space-y-2">
@@ -71,7 +66,7 @@ const GridOrders = () => {
           </motion.div>
         )
       )}
-    </motion.div>
+    </div>
   );
 };
 

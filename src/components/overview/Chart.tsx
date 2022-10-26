@@ -1,6 +1,15 @@
 import { AreaChart, BarChart } from "@tremor/react";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../../firebase/firebase";
+
+type Bar = {
+  name: string;
+  Revenue: number;
+}[];
 
 const Line = () => {
+  const [barData, setBarData] = useState<Bar>([]);
   const areaData = [
     {
       date: "Jan",
@@ -59,20 +68,17 @@ const Line = () => {
     },
   ];
 
-  const barData = [
-    {
-      name: "Macbook",
-      Revenue: 4618,
-    },
-    {
-      name: "iPhone",
-      Revenue: 3618,
-    },
-    {
-      name: "iPad",
-      Revenue: 2618,
-    },
-  ];
+  useEffect(() => {
+    const getData = async () => {
+      const barRef = doc(db, "overview", "charts");
+      const barSnap = await getDoc(barRef);
+      if (barSnap.exists()) {
+        setBarData(barSnap.data().bar);
+      }
+    };
+    getData();
+  },[]);
+
   return (
     <div className="flex w-full flex-col items-center space-y-4 overflow-x-auto overflow-y-hidden md:flex-row md:space-x-4 md:space-y-0">
       <div className="w-full overflow-hidden rounded py-2 px-2 dark:bg-[#1d1c1c]">

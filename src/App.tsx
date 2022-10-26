@@ -1,6 +1,6 @@
 import "@tremor/react/dist/esm/tremor.css";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Header from "./components/overview/Header";
 import Sidebar from "./components/Sidebar";
 import Login from "./pages/Login";
@@ -9,40 +9,57 @@ import Products from "./pages/Products";
 import { useStore } from "./context/context";
 import PopupMessage from "./components/ui/PopupMessage";
 import Orders from "./pages/Orders";
+import { useEffect } from "react";
 
 function App() {
-  const { isDark } = useStore();
+  const { isDark, user } = useStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user]);
+
   return (
     <div className={isDark ? "dark" : ""}>
-      <div className="min-h-screen bg-light px-1 font-neue text-light transition-all duration-300 dark:bg-dark dark:text-dark sm:px-4 lg:ml-[200px]">
-        <Sidebar />
+      <div className="min-h-screen bg-light font-neue text-light transition-all duration-300 dark:bg-dark dark:text-dark">
         <Routes>
           <Route
             path="/"
             element={
-              <div className="px-4">
-                <Header />
-                <Overview />
-              </div>
+              <>
+                <Sidebar />
+                <div className="px-4 lg:ml-[200px]">
+                  <Header />
+                  <Overview />
+                </div>
+              </>
             }
           />
           <Route
             path="/products"
             element={
-              <div className="relative px-4">
-                <PopupMessage />
-                <Header />
-                <Products />
-              </div>
+              <>
+                <Sidebar />
+                <div className="relative px-4 lg:ml-[200px]">
+                  <PopupMessage />
+                  <Header />
+                  <Products />
+                </div>
+              </>
             }
           />
           <Route
             path="/orders"
             element={
-              <div className="px-4">
-                <Header />
-                <Orders />
-              </div>
+              <>
+                <Sidebar />
+                <div className="px-4 lg:ml-[200px]">
+                  <Header />
+                  <Orders />
+                </div>
+              </>
             }
           />
           <Route path="/login" element={<Login />} />

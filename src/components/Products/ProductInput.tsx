@@ -21,7 +21,6 @@ const ProductInput: React.FC<ProductInputProps> = ({
   categories,
   setCategory,
   setProduct,
-  product,
   setIsOpen,
   error,
   submit,
@@ -41,6 +40,7 @@ const ProductInput: React.FC<ProductInputProps> = ({
 
   useEffect(() => {
     setProduct({
+      id: Math.floor(Math.random() * 100000),
       name: name,
       price: price,
       createdAt: new Date().getTime(),

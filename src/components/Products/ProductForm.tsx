@@ -1,5 +1,7 @@
+import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useStore } from "../../context/context";
+import { db } from "../../firebase/firebase";
 import ProductInput from "./ProductInput";
 
 interface Product {
@@ -65,11 +67,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     message: "",
   });
 
-  const submit = () => {
-    setProduct({
-      ...product,
-      id: Math.floor(Math.random() * 1000),
-    });
+  const submit = async () => {
     if (product.name.toString().length === 0) {
       setError({ type: "emptyName", message: "Name is required" });
       return;
@@ -86,8 +84,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
       return;
     }
 
-    setProducts([...products, product]);
-    setFilteredBy([...products, product]);
+    await setDoc(doc(db, "products", product.name), product);
+
     setIsOpen(false);
     setPopupMessage(true);
   };
