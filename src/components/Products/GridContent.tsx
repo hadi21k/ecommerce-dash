@@ -5,13 +5,7 @@ import ProductGrid from "./ProductGrid";
 const GridContent = () => {
   const { filteredBy } = useStore();
   return (
-    <motion.div
-      layout
-      transition={{
-        layout: { duration: 0.8, type: "spring", delay: 0.2 },
-      }}
-      className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
-    >
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       <AnimatePresence>
         {filteredBy.map(
           (product: {
@@ -39,7 +33,7 @@ const GridContent = () => {
           )
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 

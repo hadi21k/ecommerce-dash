@@ -61,7 +61,7 @@ const AddProduct: React.FC = () => {
               dragConstraints={{ bottom: 0, top: 0 }}
               dragMomentum={false}
               dragTransition={{ bounceStiffness: 300, bounceDamping: 25 }}
-              dragElastic={{ top: 0, bottom: width < 640 ? 0.4 : 0 }}
+              dragElastic={{ top: 0, bottom: width < 640 ? 0.7 : 0 }}
               onDragEnd={(e, i) => {
                 if (i.point.y > window.innerHeight * 0.95) {
                   setIsOpen(false);
@@ -87,7 +87,7 @@ const AddProduct: React.FC = () => {
                   ease: "easeIn",
                 },
               }}
-              className="fixed inset-x-0 bottom-0 overflow-y-auto scrollbar-hide sm:inset-0"
+              className="fixed top-20 inset-x-0 bottom-0 overflow-y-auto scrollbar-hide sm:inset-0"
             >
               <div className="flex min-h-full text-center sm:items-center sm:justify-center sm:p-4">
                 <Dialog.Panel className="w-full transform overflow-hidden rounded-t-lg bg-light text-left align-middle shadow-xl transition-all sm:max-w-md sm:rounded-lg">

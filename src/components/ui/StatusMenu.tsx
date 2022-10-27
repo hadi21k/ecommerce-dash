@@ -1,6 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
-import { collection, doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { Fragment } from "react";
+import { useStore } from "../../context/context";
 import { db } from "../../firebase/firebase";
 
 interface StautsMenuProps {
@@ -8,9 +9,12 @@ interface StautsMenuProps {
     id: string;
     status: string;
   };
+  index: number;
 }
 
-const StatusMenu: React.FC<StautsMenuProps> = ({ order }) => {
+const StatusMenu: React.FC<StautsMenuProps> = ({ order, index }) => {
+  const { filterOrders } = useStore();
+  console.log(filterOrders.length);
   const delivered = (id: string) => {
     const orderRef = doc(db, "orders", `${id}`);
     updateDoc(orderRef, { status: "Delivered" });
@@ -45,7 +49,11 @@ const StatusMenu: React.FC<StautsMenuProps> = ({ order }) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="divide-gray-100 absolute right-0 z-50 mt-2 w-56 origin-top-right divide-y rounded-md bg-dark shadow-lg focus:outline-none dark:bg-light">
+        <Menu.Items
+          className={`divide-gray-100 absolute right-0 z-50 mt-2 w-56 origin-top-right divide-y rounded-md bg-dark shadow-lg focus:outline-none dark:bg-light ${
+            index === filterOrders.length - 1 ? "-top-24 " : ""
+          }`}
+        >
           <div className="px-1 py-1 ">
             <Menu.Item>
               {({ active }) => (

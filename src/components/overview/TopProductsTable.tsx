@@ -23,7 +23,7 @@ const TopProductsTable: React.FC = () => {
     getData();
   }, []);
   return (
-    <div className="overflow-x-auto px-4">
+    <div className="overflow-x-auto scrollbar-hide">
       <table className="min-w-full text-sm">
         <thead>
           <tr>

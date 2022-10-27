@@ -16,7 +16,7 @@ const GridOrders = () => {
           date: string;
           time: string;
           status: string;
-        }) => (
+        },i:number) => (
           <motion.div
             layout
             initial={{ opacity: 0 }}
@@ -59,7 +59,7 @@ const GridOrders = () => {
               <div className="flex items-center justify-between rounded py-1 px-3">
                 <h1>Status</h1>
                 <h1 className="flex items-center space-x-1">
-                  <StatusMenu order={order} />
+                  <StatusMenu order={order} index={i} />
                 </h1>
               </div>
             </div>

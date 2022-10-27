@@ -10,10 +10,6 @@ const TopProducts: React.FC = () => {
         <h1 className="text-center text-lg text-light dark:text-dark md:text-left">
           Top Products
         </h1>
-        <div className="flex flex-col items-center justify-around space-y-2 space-x-4 sm:flex-row sm:space-y-0">
-          <SearchInput />
-          <TimeSelect />
-        </div>
       </div>
       <TopProductsTable />
     </div>

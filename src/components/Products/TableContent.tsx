@@ -30,13 +30,7 @@ const TableContent: React.FC = () => {
             Actions
           </h1>
         </div>
-        <motion.div
-          layout
-          transition={{
-            layout: { duration: 0.8, type: "spring", delay: 0.2 },
-          }}
-          className="space-y-4 pb-24"
-        >
+        <div className="space-y-4 pb-24">
           <AnimatePresence>
             {filteredBy.map((product: { name: string }) => (
               <motion.div
@@ -55,7 +49,7 @@ const TableContent: React.FC = () => {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
