@@ -12,9 +12,10 @@ interface TableChildProps {
     time: string;
     status: string;
   };
+  index: number;
 }
 
-const TableChild: React.FC<TableChildProps> = ({ order }) => {
+const TableChild: React.FC<TableChildProps> = ({ order,index }) => {
   return (
     <>
       <h1 className="flex w-full flex-col items-start overflow-hidden text-left text-xs font-medium tracking-wide">
@@ -40,7 +41,7 @@ const TableChild: React.FC<TableChildProps> = ({ order }) => {
       <h1
         className={`flex items-start justify-center space-x-4 rounded px-4 py-1 text-xs tracking-wide text-light `}
       >
-        <StatusMenu order={order} />
+        <StatusMenu order={order} index={index} />
       </h1>
     </>
   );

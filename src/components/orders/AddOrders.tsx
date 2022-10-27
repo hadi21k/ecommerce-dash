@@ -85,7 +85,7 @@ const AddOrders = () => {
                   ease: "easeIn",
                 },
               }}
-              className="fixed inset-x-0 bottom-0 overflow-y-auto scrollbar-hide sm:inset-0"
+              className="fixed top-80 inset-x-0 bottom-0 overflow-y-auto scrollbar-hide sm:inset-0"
             >
               <div className="flex min-h-full text-center sm:items-center sm:justify-center sm:p-4">
                 <Dialog.Panel className="w-full transform rounded-t-lg bg-light text-left align-middle shadow-xl transition-all sm:max-w-md sm:rounded-lg ">

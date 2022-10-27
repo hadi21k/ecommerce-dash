@@ -30,16 +30,19 @@ const TableOrders = () => {
         <div className="space-y-4 pb-24">
           <AnimatePresence>
             {filterOrders.map(
-              (order: {
-                id: string;
-                customerName: string;
-                price: number;
-                quantity: number;
-                product: string;
-                date: string;
-                time: string;
-                status: string;
-              }) => (
+              (
+                order: {
+                  id: string;
+                  customerName: string;
+                  price: number;
+                  quantity: number;
+                  product: string;
+                  date: string;
+                  time: string;
+                  status: string;
+                },
+                i: number
+              ) => (
                 <motion.div
                   layout
                   initial={{ opacity: 0 }}
@@ -52,7 +55,7 @@ const TableOrders = () => {
                   }}
                   className="grid h-12 w-full min-w-max grid-cols-6 place-items-center rounded px-2 text-base"
                 >
-                  <TableChild order={order} />
+                  <TableChild order={order} index={i} />
                 </motion.div>
               )
             )}
