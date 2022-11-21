@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className={isDark ? "dark" : ""}>
-      <div className="min-h-screen bg-light font-neue text-light transition-all duration-300 dark:bg-dark dark:text-dark">
+      <div className="min-h-screen bg-light font-sora text-light transition-all duration-300 dark:bg-dark dark:text-dark">
         <Routes>
           <Route
             path="/"

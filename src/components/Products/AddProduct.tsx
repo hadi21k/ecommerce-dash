@@ -59,9 +59,8 @@ const AddProduct: React.FC = () => {
               drag="y"
               dragListener={width < 640 ? true : false}
               dragConstraints={{ bottom: 0, top: 0 }}
-              dragMomentum={false}
               dragTransition={{ bounceStiffness: 300, bounceDamping: 25 }}
-              dragElastic={{ top: 0, bottom: width < 640 ? 0.7 : 0 }}
+              dragElastic={{ top: 0, bottom: width < 640 ? 0.5 : 0 }}
               onDragEnd={(e, i) => {
                 if (i.point.y > window.innerHeight * 0.95) {
                   setIsOpen(false);

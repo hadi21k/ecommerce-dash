@@ -85,7 +85,7 @@ const AddOrders = () => {
                   ease: "easeIn",
                 },
               }}
-              className="fixed top-80 inset-x-0 bottom-0 overflow-y-auto scrollbar-hide sm:inset-0"
+              className="fixed inset-x-0 top-80 bottom-0 overflow-y-auto scrollbar-hide sm:inset-0"
             >
               <div className="flex min-h-full text-center sm:items-center sm:justify-center sm:p-4">
                 <Dialog.Panel className="w-full transform rounded-t-lg bg-light text-left align-middle shadow-xl transition-all sm:max-w-md sm:rounded-lg ">
@@ -97,7 +97,7 @@ const AddOrders = () => {
                     ""
                   )}
                   <div className="p-4">
-                    <Dialog.Title className="select-none  text-lg sm:text-xl">
+                    <Dialog.Title className="select-none text-lg sm:text-xl">
                       Add new Order
                     </Dialog.Title>
                     <OrdersForm setIsOpen={setIsOpen} />

@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        neue: ["Neue Haas Grotesk Text Pro", "sans-serif"],
+        sora: ["Sora", "sans-serif"],
       },
       backgroundColor: {
         primary: "#84CC16",
